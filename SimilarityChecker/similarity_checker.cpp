@@ -10,17 +10,27 @@ public:
 		
 	}
 
+	bool isSameLength()
+	{
+		return input1.length() == input2.length();
+	}
+
+	bool isLengthTwiceDiff()
+	{
+		return input1.length() >= input2.length() * 2
+			|| input1.length() * 2 <= input2.length();
+	}
+
 	int getLengthPoint()
 	{
-		if (input1.length() == input2.length())
+		if (isSameLength())
+		{
 			return 60;
-		if (input1.length() >= input2.length())
-		{
-			if (input1.length() >= input2.length() * 2) return 0;
 		}
-		if (input1.length() <= input2.length())
+
+		if (isLengthTwiceDiff())
 		{
-			if (input1.length() * 2 <= input2.length() * 2) return 0;
+			return 0;
 		}
 	}
 
