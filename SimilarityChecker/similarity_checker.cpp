@@ -1,13 +1,14 @@
 #include <string>
+#include <algorithm>
 using namespace std;
 
 class SimilarityChecker
 {
 public:
-	explicit SimilarityChecker(string input1, string input2)
-		:input1(input1), input2(input2)
+	void init(string input1, string input2)
 	{
-		
+		this->input1 = input1;
+		this->input2 = input2;
 	}
 
 	bool isSameLength()
@@ -19,6 +20,12 @@ public:
 	{
 		return input1.length() >= input2.length() * 2
 			|| input1.length() * 2 <= input2.length();
+	}
+
+	int getPartialPoint(int longer, int shorter)
+	{
+		int gap = longer - shorter;
+		return 60 - gap * 60 / shorter;
 	}
 
 	int getLengthPoint()
@@ -33,15 +40,7 @@ public:
 			return 0;
 		}
 
-		if (input1.length() == 5 && input2.length() == 3)
-		{
-			return 20;
-		}
-
-		if (input1.length() == 2 && input2.length() == 3)
-		{
-			return 30;
-		}
+		return getPartialPoint(max(input1.length(), input2.length()), min(input1.length(), input2.length()));
 	}
 
 	string input1;
