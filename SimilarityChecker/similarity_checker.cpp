@@ -30,45 +30,12 @@ public:
 
 	int getAlphaPoint()
 	{
+		if (checkValidityForInput() == false) return false;
+
 		set<char> candAlpha;
+		getCandidateAlpha(candAlpha);
 
-		for (char alpha : input1)
-		{
-			if (alpha < 'A' || alpha > 'Z') return 0;
-			candAlpha.insert(alpha);
-		}
-		for (char alpha : input2)
-		{
-			if (alpha < 'A' || alpha > 'Z') return 0;
-			candAlpha.insert(alpha);
-		}
-
-		int totalCnt = candAlpha.size();
-		int sameCnt = 0;
-
-		for (char alpha : candAlpha)
-		{
-			bool found1 = false;
-			for (char ch : input1)
-			{
-				if (alpha == ch)
-				{
-					found1 = true;
-					break;
-				}
-			}
-			bool found2 = false;
-			for (char ch : input2)
-			{
-				if (alpha == ch)
-				{
-					found2 = true;
-					break;
-				}
-			}
-			if (found1 && found2) ++sameCnt;
-		}
-		return sameCnt * 40 / totalCnt;
+		return getSameCnt(candAlpha) * 40 / getTotalCnt(candAlpha);
 	}
 
 	string input1;
@@ -90,5 +57,61 @@ private:
 	{
 		int gap = longer - shorter;
 		return 60 - gap * 60 / shorter;
+	}
+
+	bool checkValidityForInput()
+	{
+		for (char alpha : input1)
+		{
+			if (alpha < 'A' || alpha > 'Z') return false;
+		}
+		for (char alpha : input2)
+		{
+			if (alpha < 'A' || alpha > 'Z') return false;
+		}
+	}
+
+	void getCandidateAlpha(set<char>& candAlpha)
+	{
+		for (char alpha : input1)
+		{
+			candAlpha.insert(alpha);
+		}
+		for (char alpha : input2)
+		{
+			candAlpha.insert(alpha);
+		}
+	}
+
+	bool isAlphabetExists(char alpha, string& input)
+	{
+		for (char ch : input)
+		{
+			if (alpha == ch)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	size_t getTotalCnt(set<char> candAlpha)
+	{
+		return candAlpha.size();
+	}
+
+	int getSameCnt(set<char> candAlpha)
+	{
+		int sameCnt = 0;
+
+		for (char alpha : candAlpha)
+		{
+			if (isAlphabetExists(alpha, input1) && isAlphabetExists(alpha, input2))
+			{
+				++sameCnt;
+			}
+		}
+
+		return sameCnt;
 	}
 };
