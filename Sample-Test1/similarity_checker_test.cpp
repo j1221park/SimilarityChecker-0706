@@ -27,3 +27,21 @@ TEST_F(SimilarityCheckerFixture, getLengthPointPartial) {
 	cal.init(string("AA"), string("AAE"));
 	EXPECT_EQ(30, cal.getLengthPoint());
 }
+
+TEST_F(SimilarityCheckerFixture, getAlphaPointForSameAlpha) {
+	cal.init(string("ASD"), string("DSA"));
+	EXPECT_EQ(40, cal.getAlphaPoint());
+
+	cal.init(string("AAABB"), string("BA"));
+	EXPECT_EQ(40, cal.getAlphaPoint());
+}
+
+TEST_F(SimilarityCheckerFixture, getAlphaPointForDifferentAlpha) {
+	cal.init(string("A"), string("BB"));
+	EXPECT_EQ(0, cal.getAlphaPoint());
+}
+
+TEST_F(SimilarityCheckerFixture, getAlphaPointForPartial) {
+	cal.init(string("AA"), string("AAE"));
+	EXPECT_EQ(20, cal.getAlphaPoint());
+}
