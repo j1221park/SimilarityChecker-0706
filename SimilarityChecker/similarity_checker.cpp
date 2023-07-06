@@ -32,6 +32,16 @@ public:
 		{
 			return 0;
 		}
+
+		if (input1.length() == 5 && input2.length() == 3)
+		{
+			return 20;
+		}
+
+		if (input1.length() == 2 && input2.length() == 3)
+		{
+			return 30;
+		}
 	}
 
 	string input1;

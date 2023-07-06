@@ -13,3 +13,11 @@ TEST(SimilarityCheckerTest, getLengthPointWhenTwiceDiff) {
 	SimilarityChecker cal2(string("AA"), string("B"));
 	EXPECT_EQ(0, cal2.getLengthPoint());
 }
+
+TEST(SimilarityCheckerTest, getLengthPointPartial) {
+	SimilarityChecker cal(string("AAABB"), string("BAA"));
+	EXPECT_EQ(20, cal.getLengthPoint());
+
+	SimilarityChecker cal2(string("AA"), string("AAE"));
+	EXPECT_EQ(30, cal2.getLengthPoint());
+}
