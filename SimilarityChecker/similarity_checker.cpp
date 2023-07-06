@@ -11,23 +11,6 @@ public:
 		this->input2 = input2;
 	}
 
-	bool isSameLength()
-	{
-		return input1.length() == input2.length();
-	}
-
-	bool isLengthTwiceDiff()
-	{
-		return input1.length() >= input2.length() * 2
-			|| input1.length() * 2 <= input2.length();
-	}
-
-	int getPartialPoint(int longer, int shorter)
-	{
-		int gap = longer - shorter;
-		return 60 - gap * 60 / shorter;
-	}
-
 	int getLengthPoint()
 	{
 		if (isSameLength())
@@ -45,4 +28,22 @@ public:
 
 	string input1;
 	string input2;
+
+private:
+	bool isSameLength()
+	{
+		return input1.length() == input2.length();
+	}
+
+	bool isLengthTwiceDiff()
+	{
+		return input1.length() >= input2.length() * 2
+			|| input1.length() * 2 <= input2.length();
+	}
+
+	int getPartialPoint(int longer, int shorter)
+	{
+		int gap = longer - shorter;
+		return 60 - gap * 60 / shorter;
+	}
 };
