@@ -2,6 +2,9 @@
 #include <set>
 #include <algorithm>
 
+#define MAX_LENGTH_POINT 60
+#define MAX_ALPHA_POINT 40
+
 using namespace std;
 
 class SimilarityChecker
@@ -17,7 +20,7 @@ public:
 	{
 		if (isSameLength())
 		{
-			return 60;
+			return MAX_LENGTH_POINT;
 		}
 
 		if (isLengthTwiceDiff())
@@ -35,7 +38,7 @@ public:
 		set<char> candAlpha;
 		getCandidateAlpha(candAlpha);
 
-		return getSameCnt(candAlpha) * 40 / getTotalCnt(candAlpha);
+		return getSameCnt(candAlpha) * MAX_ALPHA_POINT / getTotalCnt(candAlpha);
 	}
 
 	string input1;
@@ -56,7 +59,7 @@ private:
 	int getPartialPoint(int longer, int shorter)
 	{
 		int gap = longer - shorter;
-		return 60 - gap * 60 / shorter;
+		return MAX_LENGTH_POINT - gap * MAX_LENGTH_POINT / shorter;
 	}
 
 	bool checkValidityForInput()
